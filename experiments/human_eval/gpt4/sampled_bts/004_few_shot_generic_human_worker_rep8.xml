@@ -1,0 +1,51 @@
+<root BTCPP_format="4">
+  <!-- Specific example: a human worker in a smart factory. Related to the SITL domain.
+       Demonstrates a behavior repertoire pattern: priority-based fallback over
+       multiple distinct behavior categories (emergency / task / idle). -->
+  <BehaviorTree ID="HumanWorkerRepertoire">
+    <Fallback name="human_worker_behavior_selector">
+
+      <!-- Emergency behavior: highest priority -->
+      <Sequence name="emergency_behavior">
+        <Condition ID="IsEmergencySignalActive"/>
+        <Fallback name="emergency_actions">
+          <Sequence name="evacuate">
+            <Condition ID="IsEvacuationRouteSafe"/>
+            <Action ID="MoveToEvacuationRoute"/>
+            <Action ID="FollowEvacuationRoute"/>
+          </Sequence>
+          <Sequence name="shelter_in_place">
+            <Condition ID="IsShelterNearby"/>
+            <Action ID="MoveToShelter"/>
+            <Action ID="StayInShelter"/>
+          </Sequence>
+          <Action ID="StayPut" />
+        </Fallback>
+      </Sequence>
+
+      <!-- Task behavior: triggered by task assignment -->
+      <Sequence name="task_behavior">
+        <Condition ID="IsTaskAssigned"/>
+        <Fallback name="task_actions">
+          <Sequence name="move_to_workstation">
+            <Action ID="CheckWorkstationLocation"/>
+            <Action ID="MoveToWorkstation"/>
+          </Sequence>
+          <Sequence name="perform_task">
+            <Condition ID="IsAtWorkstation"/>
+            <Action ID="UseEquipment"/>
+            <Action ID="CompleteTask"/>
+          </Sequence>
+          <Action ID="WaitForTaskCompletion"/>
+        </Fallback>
+      </Sequence>
+
+      <!-- Idle behavior: default routine -->
+      <Sequence name="idle_behavior">
+        <Action ID="MoveToIdleArea"/>
+        <Action ID="StayInIdleArea" duration="5"/>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

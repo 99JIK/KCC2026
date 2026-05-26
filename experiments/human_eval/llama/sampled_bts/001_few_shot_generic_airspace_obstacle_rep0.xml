@@ -1,0 +1,73 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="AirspaceObstacleRepertoire">
+    <Fallback name="obstacle_behavior_selector">
+
+      <!-- Moving obstacle behavior: highest priority -->
+      <Sequence name="moving_obstacle_behavior">
+        <Condition ID="IsMovingObstacleEnabled"/>
+        <Fallback name="moving_obstacle_types">
+          <Sequence name="aircraft_encounter">
+            <Condition ID="IsAircraftPresent"/>
+            <Action ID="GenerateAircraftFlightPath"/>
+            <Action ID="UpdateAircraftPosition"/>
+          </Sequence>
+          <Sequence name="bird_flock_encounter">
+            <Condition ID="IsBirdFlockPresent"/>
+            <Action ID="GenerateBirdFlockFlightPath"/>
+            <Action ID="UpdateBirdFlockPosition"/>
+          </Sequence>
+          <Sequence name="uav_encounter">
+            <Condition ID="IsUAVPresent"/>
+            <Action ID="GenerateUAVFlightPath"/>
+            <Action ID="UpdateUAVPosition"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Static obstacle behavior: medium priority -->
+      <Sequence name="static_obstacle_behavior">
+        <Condition ID="IsStaticObstacleEnabled"/>
+        <Fallback name="static_obstacle_types">
+          <Sequence name="tower_encounter">
+            <Condition ID="IsTowerPresent"/>
+            <Action ID="GenerateTowerPosition"/>
+            <Action ID="UpdateTowerDimensions"/>
+          </Sequence>
+          <Sequence name="wind_turbine_encounter">
+            <Condition ID="IsWindTurbinePresent"/>
+            <Action ID="GenerateWindTurbinePosition"/>
+            <Action ID="UpdateWindTurbineDimensions"/>
+          </Sequence>
+          <Sequence name="skyscraper_encounter">
+            <Condition ID="IsSkyscraperPresent"/>
+            <Action ID="GenerateSkyscraperPosition"/>
+            <Action ID="UpdateSkyscraperDimensions"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Weather-related obstacle behavior: low priority -->
+      <Sequence name="weather_obstacle_behavior">
+        <Condition ID="IsWeatherObstacleEnabled"/>
+        <Fallback name="weather_obstacle_types">
+          <Sequence name="thunderstorm_encounter">
+            <Condition ID="IsThunderstormPresent"/>
+            <Action ID="GenerateThunderstormWeatherConditions"/>
+            <Action ID="UpdateThunderstormPosition"/>
+          </Sequence>
+          <Sequence name="fog_encounter">
+            <Condition ID="IsFogPresent"/>
+            <Action ID="GenerateFogWeatherConditions"/>
+            <Action ID="UpdateFogPosition"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Default behavior: no obstacles present -->
+      <ForceSuccess>
+        <Action ID="NoObstaclesPresent"/>
+      </ForceSuccess>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

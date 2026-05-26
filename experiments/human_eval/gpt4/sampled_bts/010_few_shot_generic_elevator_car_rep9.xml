@@ -1,0 +1,61 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="ElevatorCarRepertoire">
+    <Fallback name="elevator_car_behavior_selector">
+
+      <!-- Moving behavior: highest priority -->
+      <Sequence name="moving_behavior">
+        <Condition ID="IsMovementCommandReceived"/>
+        <Fallback name="movement_actions">
+          <Sequence name="move_up">
+            <Condition ID="IsCommandMoveUp"/>
+            <Action ID="EngageDrive"/>
+            <Action ID="SetDirectionUp"/>
+            <Action ID="StartMoving"/>
+          </Sequence>
+          <Sequence name="move_down">
+            <Condition ID="IsCommandMoveDown"/>
+            <Action ID="EngageDrive"/>
+            <Action ID="SetDirectionDown"/>
+            <Action ID="StartMoving"/>
+          </Sequence>
+          <Sequence name="stop">
+            <Condition ID="IsCommandStop"/>
+            <Action ID="DisengageDrive"/>
+            <Action ID="ApplyBrake"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Door behavior: triggered by door open/close commands -->
+      <Sequence name="door_behavior">
+        <Condition ID="IsDoorCommandReceived"/>
+        <Fallback name="door_actions">
+          <Sequence name="door_open">
+            <Condition ID="IsCommandDoorOpen"/>
+            <Action ID="OpenDoors"/>
+          </Sequence>
+          <Sequence name="door_close">
+            <Condition ID="IsCommandDoorClose"/>
+            <Action ID="CloseDoors"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Safety behavior: default routine -->
+      <Sequence name="safety_behavior">
+        <Condition ID="IsSafetyCheckRequired"/>
+        <Action ID="CheckDoorInterlocks"/>
+        <Action ID="CheckDriveStatus"/>
+        <Action ID="CheckBrakeStatus"/>
+      </Sequence>
+
+      <!-- Idle behavior: lowest priority -->
+      <Sequence name="idle_behavior">
+        <Condition ID="IsIdle"/>
+        <Action ID="MaintainPosition"/>
+        <Action ID="MaintainDoorStatus"/>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

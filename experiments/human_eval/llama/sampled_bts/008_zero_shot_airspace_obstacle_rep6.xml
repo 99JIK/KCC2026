@@ -1,0 +1,48 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="airspace_obstacle">
+    <Fallback>
+      <Condition ID="is_static"/>
+      <Sequence>
+        <Action ID="remain_stationary"/>
+      </Sequence>
+      <Fallback>
+        <Condition ID="is_moving"/>
+        <Sequence>
+          <Action ID="move_along_trajectory"/>
+          <Repeat ID="repeat_update_position">
+            <Action ID="update_position"/>
+          </Repeat>
+        </Sequence>
+        <Fallback>
+          <Condition ID="is_dynamic"/>
+          <Sequence>
+            <Action ID="change_trajectory"/>
+            <RetryUntilSuccessful ID="retry_avoid_collision">
+              <Action ID="avoid_collision"/>
+            </RetryUntilSuccessful>
+          </Sequence>
+        </Fallback>
+      </Fallback>
+    </Fallback>
+  </BehaviorTree>
+</root>
+<root BTCPP_format="4">
+  <BehaviorTree ID="airspace_obstacle_parallel">
+    <Parallel>
+      <Condition ID="is_visible_to_drone"/>
+      <Action ID="reflect_radar_signal"/>
+    </Parallel>
+  </BehaviorTree>
+</root>
+<root BTCPP_format="4">
+  <BehaviorTree ID="airspace_obstacle_decorators">
+    <Sequence>
+      <Inverter ID="inverter_out_of_range">
+        <Condition ID="is_out_of_drone_range"/>
+      </Inverter>
+      <ForceSuccess ID="force_initialize_properties">
+        <Action ID="initialize_obstacle_properties"/>
+      </ForceSuccess>
+    </Sequence>
+  </BehaviorTree>
+</root>

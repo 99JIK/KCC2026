@@ -1,0 +1,44 @@
+<root BTCPP_format="4">
+    <BehaviorTree ID="airspace_obstacle_behavior">
+        <Fallback>
+            <!-- Subtree for stationary obstacles -->
+            <Sequence>
+                <Condition ID="is_drone_in_proximity"/>
+                <Action ID="initiate_obstacle_presence"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="is_drone_far"/>
+                <Action ID="terminate_obstacle_presence"/>
+            </Sequence>
+
+            <!-- Subtree for moving obstacles -->
+            <Sequence>
+                <Condition ID="is_drone_in_proximity"/>
+                <Fallback>
+                    <Sequence>
+                        <Condition ID="is_obstacle_path_intersecting_drone_path"/>
+                        <Action ID="continue_obstacle_movement"/>
+                    </Sequence>
+                    <Sequence>
+                        <Condition ID="is_obstacle_path_clear"/>
+                        <Action ID="alter_obstacle_path"/>
+                    </Sequence>
+                </Fallback>
+            </Sequence>
+            <Sequence>
+                <Condition ID="is_drone_far"/>
+                <Action ID="stop_obstacle_movement"/>
+            </Sequence>
+
+            <!-- Subtree for unpredictable obstacles -->
+            <Sequence>
+                <Condition ID="is_drone_in_proximity"/>
+                <Action ID="initiate_unpredictable_movement"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="is_drone_far"/>
+                <Action ID="terminate_unpredictable_movement"/>
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+</root>

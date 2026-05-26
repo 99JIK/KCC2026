@@ -1,0 +1,70 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="ElevatorCarBehaviors">
+    <Parallel>
+      <Sequence>
+        <Fallback>
+          <Condition ID="DoorsFullyOpen"/>
+          <Action ID="OpenDoors"/>
+        </Fallback>
+        <Fallback>
+          <Condition ID="DoorsFullyClosed"/>
+          <Action ID="CloseDoors"/>
+        </Fallback>
+        <Repeat num_cycles="0">
+          <Sequence>
+            <Condition ID="DoorsNotFullyClosed"/>
+            <Action ID="StopCarMovement"/>
+          </Sequence>
+        </Repeat>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Condition ID="CarAtTargetFloor"/>
+          <Action ID="StopCarMovement"/>
+        </Fallback>
+        <Fallback>
+          <Condition ID="CarNotMoving"/>
+          <Action ID="StartCarMovement"/>
+        </Fallback>
+        <Repeat num_cycles="0">
+          <Sequence>
+            <Condition ID="CarOverSpeed"/>
+            <Action ID="SlowCarMovement"/>
+          </Sequence>
+        </Repeat>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Condition ID="ObstacleDetected"/>
+          <Action ID="StopCarMovement"/>
+        </Fallback>
+        <Fallback>
+          <Condition ID="CarOverload"/>
+          <Action ID="AlarmAndStopCarMovement"/>
+        </Fallback>
+        <Repeat num_cycles="0">
+          <Sequence>
+            <Condition ID="SensorFailure"/>
+            <Action ID="NotifySUTOfSensorFailure"/>
+          </Sequence>
+        </Repeat>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Condition ID="EmergencyStopRequested"/>
+          <Action ID="EngageBrakes"/>
+        </Fallback>
+        <Fallback>
+          <Condition ID="CarFreeFallDetected"/>
+          <Action ID="EngageEmergencyBrakes"/>
+        </Fallback>
+        <Repeat num_cycles="0">
+          <Sequence>
+            <Condition ID="BrakeFailure"/>
+            <Action ID="NotifySUTOfBrakeFailure"/>
+          </Sequence>
+        </Repeat>
+      </Sequence>
+    </Parallel>
+  </BehaviorTree>
+</root>

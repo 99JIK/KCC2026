@@ -1,0 +1,37 @@
+<root BTCPP_format="4">
+  <!-- Specific example: an airspace obstacle in a drone delivery simulation.
+       Demonstrates a behavior repertoire pattern: priority-based fallback over
+       multiple distinct behavior categories (moving / stationary / hazard). -->
+  <BehaviorTree ID="AirspaceObstacleRepertoire">
+    <Fallback name="obstacle_behavior_selector">
+
+      <!-- Moving behavior: highest priority -->
+      <Sequence name="moving_behavior">
+        <Condition ID="IsMoving"/>
+        <Fallback name="moving_actions">
+          <Sequence name="change_trajectory">
+            <Condition ID="IsPathClear"/>
+            <Action ID="UpdateTrajectory"/>
+          </Sequence>
+          <Sequence name="maintain_course">
+            <Condition ID="IsPathBlocked"/>
+            <Action ID="HoldCourse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Stationary behavior: triggered when the obstacle is not moving -->
+      <Sequence name="stationary_behavior">
+        <Condition ID="IsStationary"/>
+        <Action ID="StayStill"/>
+      </Sequence>
+
+      <!-- Hazard behavior: triggered when obstacle becomes a hazard -->
+      <Sequence name="hazard_behavior">
+        <Condition ID="IsHazard"/>
+        <Action ID="EmitWarningSignal"/>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

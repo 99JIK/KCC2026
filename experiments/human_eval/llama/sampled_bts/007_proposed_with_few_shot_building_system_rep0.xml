@@ -1,0 +1,99 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="BuildingSystemRepertoire">
+    <Fallback name="building_system_behavior_selector">
+
+      <!-- Emergency responses: highest priority -->
+      <Sequence name="emergency_response_behavior">
+        <Fallback name="emergency_response_actions">
+          <Sequence name="fire_alarm_response">
+            <Condition ID="IsFireDetected"/>
+            <Action ID="SendFireAlarmSignal"/>
+            <Action ID="ActivateFireSuppressionSystems"/>
+            <Action ID="SealOffAffectedAreas"/>
+            <Action ID="ProvideRealTimeFireStatusUpdates"/>
+          </Sequence>
+          <Sequence name="seismic_event_response">
+            <Condition ID="IsSeismicActivityDetected"/>
+            <Action ID="SendSeismicAlert"/>
+            <Action ID="InitiateSafetyProtocols"/>
+            <Action ID="InspectBuildingStructureAndSystems"/>
+            <Action ID="ReportDamageToElevatorControlSoftware"/>
+          </Sequence>
+          <Sequence name="security_breach_response">
+            <Condition ID="IsSecurityBreachDetected"/>
+            <Action ID="LockdownBuildingAndRestrictAccess"/>
+            <Action ID="NotifyElevatorControlSoftwareOfLockdown"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Fault handling: second priority -->
+      <Sequence name="fault_handling_behavior">
+        <Fallback name="fault_handling_actions">
+          <Sequence name="sensor_fault_handling">
+            <Condition ID="IsSensorFaulty"/>
+            <Action ID="SendErrorSignalToElevatorControlSoftware"/>
+            <Action ID="SwitchToRedundantSensorOrSystem"/>
+            <Action ID="NotifyElevatorControlSoftwareOfSensorSwitch"/>
+          </Sequence>
+          <Sequence name="system_fault_handling">
+            <Condition ID="IsSystemFaulty"/>
+            <Action ID="SendErrorSignalToElevatorControlSoftware"/>
+            <Action ID="SwitchToBackupOrRedundantSystem"/>
+            <Action ID="NotifyElevatorControlSoftwareOfSystemSwitch"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Normal operation: third priority -->
+      <Sequence name="normal_operation_behavior">
+        <Fallback name="normal_operation_actions">
+          <Sequence name="routine_status_updates">
+            <Action ID="SendRoutineStatusUpdatesToElevatorControlSoftware"/>
+          </Sequence>
+          <Sequence name="heating_and_cooling调整">
+            <Action ID="AdjustHeatingAndCoolingSystemsBasedOnTimeAndWeather"/>
+          </Sequence>
+          <Sequence name="periodic_system_testing">
+            <Action ID="PeriodicallyTestAndConfirmSensorAndSystemFunctionality"/>
+          </Sequence>
+          <Sequence name="power_management_interaction">
+            <Condition ID="IsHighPowerDemand"/>
+            <Action ID="SendSignalToElevatorControlSoftwareToReducePowerConsumption"/>
+            <Action ID="SwitchToBackupPowerSystems"/>
+            <Action ID="ImplementLoadSheddingProtocols"/>
+          </Sequence>
+          <Sequence name="security_access_control">
+            <Action ID="GrantAccessToAuthorizedPersonnel"/>
+            <Action ID="RestrictAccessToUnauthorizedIndividuals"/>
+            <Action ID="ImplementTimeOfDayAccessRestrictions"/>
+          </Sequence>
+          <Sequence name="environmental_disturbance_response">
+            <Condition ID="IsSevereWeatherForecasted"/>
+            <Action ID="SendSignalToElevatorControlSoftwareToPrepareForWeather"/>
+            <Action ID="SealExteriorOpeningsAndActivateStormShutters"/>
+            <Action ID="ImplementEmergencyLightingAndBackupPowerSystems"/>
+          </Sequence>
+          <Sequence name="firefighter_mode_activation">
+            <Condition ID="IsFireAlarmSignalReceived"/>
+            <Action ID="SendSignalToActivateFirefighterMode"/>
+            <Action ID="ProvideRealTimeInformationOnFireStatusAndOccupantLocation"/>
+            <Action ID="UnlockAllDoorsAndGrantAccessToEmergencyResponders"/>
+          </Sequence>
+          <Sequence name="system_maintenance_interaction">
+            <Action ID="ScheduleAndCoordinateMaintenanceWithElevatorControlSoftware"/>
+            <Action ID="SendNotificationsToElevatorControlSoftwareDuringMaintenance"/>
+            <Action ID="SwitchToBackupOrRedundantSystemsDuringMaintenance"/>
+          </Sequence>
+          <Sequence name="edge_case_scenario_handling">
+            <Condition ID="IsUnexpectedWaterLeakDetected"/>
+            <Action ID="ActivateWaterMitigationSystemsAndRestrictAccess"/>
+            <Action ID="ImplementSafetyProtocolsInResponseToPowerSurge"/>
+            <Action ID="SwitchToBackupWaterSourceIfAvailable"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

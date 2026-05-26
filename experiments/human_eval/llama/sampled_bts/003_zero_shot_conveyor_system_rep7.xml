@@ -1,0 +1,64 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="conveyor_system_behavior">
+    <Parallel>
+      <Sequence>
+        <Fallback>
+          <Condition ID="is_conveyor_belt_powered_on"/>
+          <Sequence>
+            <Action ID="start_conveyor_belt"/>
+            <Repeat>
+              <Condition ID="is_conveyor_belt_running"/>
+            </Repeat>
+          </Sequence>
+        </Fallback>
+        <Fallback>
+          <Condition ID="is_conveyor_belt_powered_off"/>
+          <Sequence>
+            <Action ID="stop_conveyor_belt"/>
+            <Repeat>
+              <Condition ID="is_conveyor_belt_idle"/>
+            </Repeat>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Condition ID="is_material_available"/>
+          <Sequence>
+            <Action ID="pick_up_material"/>
+            <Action ID="transport_material"/>
+            <Action ID="drop_off_material"/>
+          </Sequence>
+        </Fallback>
+        <Fallback>
+          <Condition ID="is_material_unavailable"/>
+          <Sequence>
+            <Action ID="wait_for_material"/>
+            <Repeat>
+              <Condition ID="is_material_handling_idle"/>
+            </Repeat>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Condition ID="is_workstation_available"/>
+          <Sequence>
+            <Action ID="request_workstation_allocation"/>
+            <Action ID="perform_task_at_workstation"/>
+            <Action ID="release_workstation_allocation"/>
+          </Sequence>
+        </Fallback>
+        <Fallback>
+          <Condition ID="is_workstation_unavailable"/>
+          <Sequence>
+            <Action ID="wait_for_workstation_availability"/>
+            <Repeat>
+              <Condition ID="is_workstation_coordination_idle"/>
+            </Repeat>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+    </Parallel>
+  </BehaviorTree>
+</root>

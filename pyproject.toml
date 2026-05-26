@@ -1,0 +1,28 @@
+[project]
+name = "sil-env-bt-gen"
+version = "1.0.0"
+description = "Automatic Generation of Test Environment Behaviors Using LLM for Embedded Software Testing"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.0",
+    "pyyaml>=6.0",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+    "statsmodels>=0.14",
+    "scipy>=1.10",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.1",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,49 @@
+<root BTCPP_format="4">
+    <BehaviorTree ID="ElevatorCarBehavior">
+        <Fallback>
+            <!-- Dimension 3: Emergency Response -->
+            <Sequence>
+                <Condition ID="PowerOutageDetected"/>
+                <Action ID="StopElevator"/>
+                <Action ID="EngageEmergencyBrakes"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="FireAlarmDetected"/>
+                <Action ID="MoveToNearestFloor"/>
+                <Action ID="OpenDoors"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="EmergencyStopPressed"/>
+                <Action ID="StopElevator"/>
+            </Sequence>
+            <!-- Dimension 4: Fault Handling -->
+            <Sequence>
+                <Condition ID="BrakeFailureDetected"/>
+                <Action ID="EnterEmergencyStopMode"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="DoorObstructionPersisting"/>
+                <Action ID="AlertMaintenance"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="SensorMalfunction"/>
+                <Action ID="CeaseOperation"/>
+            </Sequence>
+            <!-- Dimension 1: Normal Operation -->
+            <Sequence>
+                <Condition ID="RequestReceived"/>
+                <Action ID="MoveToRequestedFloor"/>
+                <Action ID="StopAtFloor"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="NoRequest"/>
+                <Action ID="StayIdle"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="RequestInCurrentDirection"/>
+                <Action ID="PrioritizeRequest"/>
+            </Sequence>
+            <!-- Other Dimensions as per the enumeration -->
+        </Fallback>
+    </BehaviorTree>
+</root>

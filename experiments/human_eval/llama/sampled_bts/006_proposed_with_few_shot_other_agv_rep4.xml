@@ -1,0 +1,205 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="OtherAGVRepertoire">
+    <Fallback name="other_agv_behavior_selector">
+
+      <!-- Dimension 5: Emergency Response -->
+      <Sequence name="emergency_response">
+        <Condition ID="IsEmergencySituationDetected"/>
+        <Fallback name="emergency_actions">
+          <Sequence name="clear_area">
+            <Action ID="ClearAreaImmediately"/>
+          </Sequence>
+          <Sequence name="alert_others">
+            <Action ID="AlertOtherAGVs"/>
+            <Action ID="AlertSUT"/>
+          </Sequence>
+          <Sequence name="emergency_stop">
+            <Action ID="ExecuteEmergencyStop"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 4: Fault Tolerance -->
+      <Sequence name="fault_tolerance">
+        <Condition ID="IsMechanicalFailureDetected"/>
+        <Fallback name="fault_handling">
+          <Sequence name="safe_shutdown">
+            <Action ID="ExecuteSafeShutdownSequence"/>
+          </Sequence>
+          <Sequence name="redundant_systems">
+            <Condition ID="AreRedundantSystemsAvailable"/>
+            <Action ID="UseRedundantSensorsOrSystems"/>
+          </Sequence>
+          <Sequence name="request_maintenance">
+            <Action ID="RequestMaintenanceOrRepair"/>
+          </Sequence>
+          <Sequence name="limp_to_safe_location">
+            <Action ID="LimpToSafeLocationOrDockingStation"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 1: Normal Navigation -->
+      <Sequence name="normal_navigation">
+        <Condition ID="IsNormalNavigationMode"/>
+        <Fallback name="navigation_actions">
+          <Sequence name="follow_path">
+            <Action ID="FollowPredefinedPath"/>
+            <Action ID="MaintainConstantSpeed"/>
+          </Sequence>
+          <Sequence name="slow_down_for_curve">
+            <Condition ID="IsApproachingCurve"/>
+            <Action ID="SlowDownForCurve"/>
+          </Sequence>
+          <Sequence name="adjust_speed_for_terrain">
+            <Condition ID="IsTerrainChangeDetected"/>
+            <Action ID="AdjustSpeedForTerrain"/>
+          </Sequence>
+          <Sequence name="avoid_static_obstacles">
+            <Condition ID="IsStaticObstacleDetected"/>
+            <Action ID="UseSensorsToDetectAndAvoidObstacles"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 2: Congestion Handling -->
+      <Sequence name="congestion_handling">
+        <Condition ID="IsCongestedAreaDetected"/>
+        <Fallback name="congestion_actions">
+          <Sequence name="reduce_speed">
+            <Action ID="ReduceSpeedToPreventCollisions"/>
+          </Sequence>
+          <Sequence name="stop_and_wait">
+            <Condition ID="IsTrafficBlocked"/>
+            <Action ID="ComeToCompleteStopAndWait"/>
+          </Sequence>
+          <Sequence name="change_route">
+            <Action ID="ChangeRouteToAvoidCongestedAreas"/>
+          </Sequence>
+          <Sequence name="use_alternative_routes">
+            <Action ID="UseAlternativeRoutesOrDetours"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 3: Path Conflict Resolution -->
+      <Sequence name="path_conflict_resolution">
+        <Condition ID="IsPathConflictDetected"/>
+        <Fallback name="conflict_resolution_actions">
+          <Sequence name="yield_to_sut">
+            <Condition ID="IsSUTPriorityHigher"/>
+            <Action ID="YieldToSUT"/>
+          </Sequence>
+          <Sequence name="request_priority_access">
+            <Condition ID="IsHighPriorityTask"/>
+            <Action ID="RequestPriorityAccessToPath"/>
+          </Sequence>
+          <Sequence name="negotiate_with_other_agvs">
+            <Action ID="NegotiateWithOtherAGVsToResolveConflict"/>
+          </Sequence>
+          <Sequence name="first_come_first_served">
+            <Action ID="ExecuteFirstComeFirstServedToResolveConflict"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 6: AGV-AGV Interaction -->
+      <Sequence name="agv_agv_interaction">
+        <Condition ID="IsAGVInteractionRequired"/>
+        <Fallback name="agv_interaction_actions">
+          <Sequence name="merge_paths">
+            <Action ID="MergeWithOtherAGVPath"/>
+          </Sequence>
+          <Sequence name="yield_to_other_agv">
+            <Condition ID="IsOtherAGVPriorityHigher"/>
+            <Action ID="YieldToOtherAGV"/>
+          </Sequence>
+          <Sequence name="coordinate_complex_task">
+            <Action ID="CoordinateWithOtherAGVsForComplexTask"/>
+          </Sequence>
+          <Sequence name="communicate_for_priority_access">
+            <Action ID="CommunicateToNegotiatePriorityAccessToWorkstation"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 7: Environmental Disturbance Response -->
+      <Sequence name="environmental_disturbance_response">
+        <Condition ID="IsEnvironmentalDisturbanceDetected"/>
+        <Fallback name="disturbance_response_actions">
+          <Sequence name="avoid_affected_areas">
+            <Action ID="AvoidAreasAffectedByPowerOutage"/>
+          </Sequence>
+          <Sequence name="use_alternative_routes_for_obstacles">
+            <Action ID="UseAlternativeRoutesForUnexpectedObstacles"/>
+          </Sequence>
+          <Sequence name="reduce_speed_for_hazardous_conditions">
+            <Condition ID="AreEnvironmentalConditionsHazardous"/>
+            <Action ID="ReduceSpeedOrComeToStopForHazardousConditions"/>
+          </Sequence>
+          <Sequence name="request_guidance">
+            <Action ID="RequestGuidanceOrAssistanceFromSUT"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 8: Workstation Coordination -->
+      <Sequence name="workstation_coordination">
+        <Condition ID="IsWorkstationCoordinationRequired"/>
+        <Fallback name="workstation_coordination_actions">
+          <Sequence name="coordinate_with_workstations">
+            <Action ID="CoordinateWithWorkstationsForEfficientTaskExecution"/>
+          </Sequence>
+          <Sequence name="prioritize_tasks_based_on_workstation_availability">
+            <Action ID="PrioritizeTasksBasedOnWorkstationAvailabilityAndTaskUrgency"/>
+          </Sequence>
+          <Sequence name="request_workstation_status">
+            <Action ID="CommunicateToRequestWorkstationStatusOrTaskAssignments"/>
+          </Sequence>
+          <Sequence name="adjust_schedule">
+            <Action ID="AdjustScheduleToAccommodateChangesInWorkstationAvailabilityOrTaskPriorities"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 9: Boundary Violation Response -->
+      <Sequence name="boundary_violation_response">
+        <Condition ID="IsBoundaryViolationDetected"/>
+        <Fallback name="boundary_violation_response_actions">
+          <Sequence name="stop_immediately">
+            <Action ID="StopImmediately"/>
+          </Sequence>
+          <Sequence name="alert_sut_and_other_agvs">
+            <Action ID="AlertSUTAndOtherAGVsOfBoundaryViolation"/>
+          </Sequence>
+          <Sequence name="recover_to_safe_location">
+            <Action ID="ExecuteRecoverySequenceToReturnToSafeLocation"/>
+          </Sequence>
+          <Sequence name="request_guidance_for_boundary_violation">
+            <Action ID="RequestGuidanceOrAssistanceFromSUTForBoundaryViolation"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Dimension 10: Communication Disruption -->
+      <Sequence name="communication_disruption_response">
+        <Condition ID="IsCommunicationDisruptionDetected"/>
+        <Fallback name="communication_disruption_response_actions">
+          <Sequence name="attempt_to_reestablish_communication">
+            <Action ID="AttemptToReestablishCommunicationWithSUTOrOtherAGVs"/>
+          </Sequence>
+          <Sequence name="execute_pre_programmed_sequence">
+            <Action ID="ExecutePreProgrammedSequenceOfActions"/>
+          </Sequence>
+          <Sequence name="use_alternative_communication_methods">
+            <Action ID="UseAlternativeCommunicationMethodsOrProtocols"/>
+          </Sequence>
+          <Sequence name="continue_operating_autonomously">
+            <Action ID="ContinueOperatingAutonomouslyUsingCachedDataOrPreProgrammedInstructions"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

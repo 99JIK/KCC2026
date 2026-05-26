@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.local
+
+# BehaviorTree.CPP loader binary (built locally)
+src/bt_validator/btcpp_loader
+
+# Generated analysis outputs (CSV tables are committed; everything else is regenerated)
+experiments/results/*
+!experiments/results/gpt4/
+!experiments/results/llama/
+!experiments/results/*.csv
+experiments/results/gpt4/*
+experiments/results/llama/*
+!experiments/results/gpt4/*.csv
+!experiments/results/llama/*.csv
+
+# Human eval: comparison output is regenerated from the filled-in template.
+experiments/human_eval/**/comparison.csv
+experiments/human_eval/**/*.bak
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/
+.idea/

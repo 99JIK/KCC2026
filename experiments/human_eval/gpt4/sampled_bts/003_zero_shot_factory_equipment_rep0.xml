@@ -1,0 +1,48 @@
+<root BTCPP_format="4">
+    <BehaviorTree ID="FactoryEquipment">
+        <Fallback>
+            <Sequence>
+                <Condition ID="EquipmentIdle"/>
+                <Action ID="StartIdleBehavior"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="EquipmentProcessing"/>
+                <Action ID="StartProcessingBehavior"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="EquipmentMaintenance"/>
+                <Action ID="StartMaintenanceBehavior"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="EquipmentError"/>
+                <Action ID="StartErrorBehavior"/>
+            </Sequence>
+            <Sequence>
+                <Condition ID="EquipmentShutdown"/>
+                <Action ID="StartShutdownBehavior"/>
+            </Sequence>
+            <Fallback>
+                <Sequence>
+                    <Condition ID="RobotArmIdle"/>
+                    <Action ID="StartRobotArmIdleBehavior"/>
+                </Sequence>
+                <Sequence>
+                    <Condition ID="RobotArmProcessing"/>
+                    <Action ID="StartRobotArmProcessingBehavior"/>
+                </Sequence>
+                <Sequence>
+                    <Condition ID="RobotArmMaintenance"/>
+                    <Action ID="StartRobotArmMaintenanceBehavior"/>
+                </Sequence>
+                <Sequence>
+                    <Condition ID="RobotArmError"/>
+                    <Action ID="StartRobotArmErrorBehavior"/>
+                </Sequence>
+                <Sequence>
+                    <Condition ID="RobotArmShutdown"/>
+                    <Action ID="StartRobotArmShutdownBehavior"/>
+                </Sequence>
+            </Fallback>
+        </Fallback>
+    </BehaviorTree>
+</root>

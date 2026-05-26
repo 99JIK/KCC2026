@@ -1,0 +1,63 @@
+<root BTCPP_format="4">
+    <BehaviorTree ID="ElevatorCarBehavior">
+
+        <!-- Main Control Node -->
+        <Fallback>
+
+            <!-- Subtree for normal operation -->
+            <Sequence name="NormalOperation">
+                <!-- Check if in normal operation -->
+                <Condition ID="IsNormalOperation"/>
+                <!-- Subtrees for normal operation -->
+                <Fallback name="NormalOperationTasks">
+                    <!-- Move car -->
+                    <Action ID="MoveElevatorCar"/>
+                    <!-- Open door -->
+                    <Action ID="OpenElevatorCarDoor"/>
+                    <!-- Close door -->
+                    <Action ID="CloseElevatorCarDoor"/>
+                </Fallback>
+            </Sequence>
+
+            <!-- Subtree for emergency operation -->
+            <Sequence name="EmergencyOperation">
+                <!-- Check if in emergency operation -->
+                <Condition ID="IsEmergencyOperation"/>
+                <!-- Subtrees for emergency operation -->
+                <Fallback name="EmergencyOperationTasks">
+                    <!-- Apply brakes -->
+                    <Action ID="ApplyElevatorCarBrakes"/>
+                    <!-- Open door -->
+                    <Action ID="OpenElevatorCarDoor"/>
+                </Fallback>
+            </Sequence>
+
+            <!-- Subtree for maintenance operation -->
+            <Sequence name="MaintenanceOperation">
+                <!-- Check if in maintenance operation -->
+                <Condition ID="IsMaintenanceOperation"/>
+                <!-- Subtrees for maintenance operation -->
+                <Fallback name="MaintenanceOperationTasks">
+                    <!-- Move car to maintenance floor -->
+                    <Action ID="MoveElevatorCarToMaintenance"/>
+                    <!-- Open door -->
+                    <Action ID="OpenElevatorCarDoor"/>
+                    <!-- Close door -->
+                    <Action ID="CloseElevatorCarDoor"/>
+                </Fallback>
+            </Sequence>
+            
+            <!-- Subtree for Idle operation -->
+            <Sequence name="IdleOperation">
+                <!-- Check if the car is in idle state -->
+                <Condition ID="IsIdleOperation"/>
+                <!-- Subtree for Idle operation -->
+                <Fallback name="IdleOperationTasks">
+                    <!-- Keep the door closed -->
+                    <Action ID="CloseElevatorCarDoor"/>
+                </Fallback>
+            </Sequence>
+
+        </Fallback>
+    </BehaviorTree>
+</root>

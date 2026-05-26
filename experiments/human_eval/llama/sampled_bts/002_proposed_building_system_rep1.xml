@@ -1,0 +1,75 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="main_tree_to_execute">
+    <Fallback>
+      <!-- Emergency/Safety Responses -->
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <Action ID="activate_fire_alarm"/>
+            <Action ID="send_fire_location_and_severity"/>
+            <Action ID="simulate_fire_department_response"/>
+            <Action ID="trigger_elevator_recall"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_seismic_activity"/>
+            <Action ID="trigger_elevator_safety_protocols"/>
+            <Action ID="model_post_earthquake_inspection"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_security_breach"/>
+            <Action ID="trigger_elevator_protocols_to_prevent_intruder_access"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_extreme_weather"/>
+            <Action ID="trigger_elevator_safety_protocols"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_fire_during_power_outage"/>
+            <Action ID="model_response_to_simultaneous_activation_of_multiple_building_systems"/>
+            <Action ID="trigger_elevator_safety_protocols_for_unique_combination_of_events"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <!-- Fault Handling -->
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <Action ID="send_erroneous_sensor_data"/>
+            <Action ID="model_effects_of_intermittent_sensor_faults"/>
+            <Action ID="trigger_elevator_error_handling_protocols"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_power_outage"/>
+            <Action ID="send_signal_to_initiate_backup_power_protocols"/>
+            <Action ID="model_effects_of_brownout_on_elevator_operation"/>
+            <Action ID="trigger_simulated_generator_startup"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <!-- Normal Operation -->
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <Action ID="send_periodic_status_updates"/>
+            <Action ID="simulate_routine_traffic_patterns"/>
+            <Action ID="implement_schedule_for_simulated_maintenance_activities"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_scheduled_maintenance_activity"/>
+            <Action ID="model_effects_of_elevator_system_test"/>
+            <Action ID="trigger_elevator_protocols_to_support_testing_and_inspection_activities"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="restrict_access_to_authorized_personnel"/>
+            <Action ID="grant_access_to_emergency_responders"/>
+          </Sequence>
+          <Sequence>
+            <Action ID="simulate_communication_between_building_systems_and_firefighters"/>
+            <Action ID="model_interaction_between_building_systems_and_maintenance_personnel"/>
+            <Action ID="trigger_elevator_protocols_in_response_to_communication_from_security_personnel"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+    </Fallback>
+  </BehaviorTree>
+</root>

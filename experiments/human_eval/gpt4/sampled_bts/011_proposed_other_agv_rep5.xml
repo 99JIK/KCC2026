@@ -1,0 +1,47 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="OtherAGVBehaviorRepertoire">
+    <Fallback>
+      <Sequence>
+        <Action ID="StopsForFireAlarm"/>
+        <Action ID="ShutsDownDuringPowerOutage"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="StopsForObstacle"/>
+        <Action ID="ReRoutesAroundObstacle"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="DetectsMechanicalFailure"/>
+        <Action ID="RecoversFromSoftwareGlitch"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="FollowsAssignedPath"/>
+        <Action ID="CompletesTask"/>
+        <Action ID="ReturnsToHomeBase"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="AdjustsToLightingChange"/>
+        <Action ID="HandlesTemperatureVariation"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="CommunicatesWithOtherAGVs"/>
+        <Action ID="ResolvesPathConflict"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="ChoosesLessCongestedPath"/>
+        <Action ID="WaitsForTrafficToClear"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="PrioritizesUrgentTask"/>
+        <Action ID="SchedulesTasks"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="RechargesWhenLowOnEnergy"/>
+        <Action ID="OptimizesEnergyUsage"/>
+      </Sequence>
+      <Sequence>
+        <Action ID="HandlesSuddenTaskInflux"/>
+        <Action ID="RespondsToMultipleFailures"/>
+      </Sequence>
+    </Fallback>
+  </BehaviorTree>
+</root>

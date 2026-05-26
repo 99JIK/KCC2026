@@ -1,0 +1,165 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="signal_environment">
+    <Fallback>
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <Action ID="detect_signal_spoofing"/>
+            <Action ID="alert_system"/>
+          </Sequence>
+          <Sequence>
+            <Condition ID="ionospheric_scintillation_detected"/>
+            <Action ID="adjust_signal_processing"/>
+          </Sequence>
+          <Sequence>
+            <Condition ID="solar_radiation_storm_detected"/>
+            <Action ID="protect_system"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <Condition ID="signal_loss_detected"/>
+            <Action ID="attempt_signal_recovery"/>
+          </Sequence>
+          <Sequence>
+            <Condition ID="interference_detected"/>
+            <Action ID="apply_interference_mitigation"/>
+          </Sequence>
+          <Sequence>
+            <Condition ID="multipath_effects_detected"/>
+            <Action ID="adjust_signal_processing"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+      <Parallel>
+        <Sequence>
+          <Action ID="maintain_optimal_signal_strength"/>
+          <Action ID="adjust_signal_propagation"/>
+          <Action ID="simulate_standard_signal_attenuation"/>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Condition ID="heavy_rainfall_or_fog_detected"/>
+              <Action ID="introduce_signal_loss"/>
+            </Sequence>
+            <Sequence>
+              <Condition ID="urban_canyon_or_obstacles_detected"/>
+              <Action ID="simulate_signal_weakening"/>
+            </Sequence>
+            <Sequence>
+              <Condition ID="building_materials_or_vegetation_detected"/>
+              <Action ID="model_signal_attenuation"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="generate_intentional_interference"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="simulate_unintentional_interference"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_periodic_or_bursts_interference"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="model_signal_reflections"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="simulate_signal_echoes"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_random_or_patterned_multipath_effects"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="simulate_ionospheric_disturbances"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="model_tropospheric_effects"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_random_or_periodic_atmospheric_disturbances"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="simulate_satellite_constellation_changes"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="model_reduced_satellite_availability"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_intentional_or_unintentional_satellite_constellation_variations"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="introduce_random_rf_noise"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="simulate_patterned_rf_noise"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_periodic_or_bursts_rf_noise"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="simulate_malicious_signal_spoofing"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="model_signal_spoofing_attacks"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_random_or_patterned_signal_spoofing"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="model_rapid_ionospheric_changes"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="simulate_signal_phase_and_amplitude_fluctuations"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_random_or_periodic_ionospheric_scintillation"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+        <Sequence>
+          <Fallback>
+            <Sequence>
+              <Action ID="simulate_space_weather_events"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="model_increased_radiation_levels"/>
+            </Sequence>
+            <Sequence>
+              <Action ID="introduce_random_or_periodic_solar_radiation_storms"/>
+            </Sequence>
+          </Fallback>
+        </Sequence>
+      </Parallel>
+    </Fallback>
+  </BehaviorTree>
+</root>

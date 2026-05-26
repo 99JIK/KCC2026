@@ -1,0 +1,107 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="human_worker">
+    <Fallback>
+      <!-- Emergency and Safety Responses -->
+      <Sequence>
+        <Sequence>
+          <Condition ID="fire_alarm_detected"/>
+          <Action ID="evacuate_area"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="spill_detected"/>
+          <Action ID="report_spill_to_fleet_control"/>
+          <Action ID="await_further_instructions"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="equipment_malfunction_detected"/>
+          <Action ID="shut_down_equipment"/>
+          <Action ID="notify_maintenance_personnel"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="fire_drill_initiated"/>
+          <Action ID="participate_in_fire_drill"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="safety_hazard_detected"/>
+          <Action ID="report_safety_hazard_to_fleet_control"/>
+          <Action ID="participate_in_safety_training"/>
+        </Sequence>
+      </Sequence>
+      <!-- Fault Handling -->
+      <Sequence>
+        <Sequence>
+          <Condition ID="error_detected"/>
+          <Action ID="correct_mistake"/>
+          <Action ID="notify_supervisor_of_error"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="mistake_detected"/>
+          <Action ID="recover_from_mistake"/>
+          <Action ID="implement_workaround"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="equipment_malfunction_detected"/>
+          <Action ID="restart_equipment"/>
+          <Action ID="reboot_equipment"/>
+        </Sequence>
+      </Sequence>
+      <!-- Normal Operation -->
+      <Parallel>
+        <Sequence>
+          <Condition ID="task_assigned"/>
+          <Action ID="perform_assembly_task"/>
+          <Action ID="operate_machine"/>
+          <Action ID="conduct_quality_control_checks"/>
+          <Action ID="adapt_task_execution_to_changes"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="agv_detected"/>
+          <Action ID="stop_moving"/>
+          <Condition ID="static_obstacle_detected"/>
+          <Action ID="change_direction"/>
+          <Condition ID="congested_area_detected"/>
+          <Action ID="slow_down"/>
+          <Condition ID="blocked_primary_route_detected"/>
+          <Action ID="use_secondary_path"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="destination_unknown"/>
+          <Action ID="follow_predefined_path"/>
+          <Action ID="use_visual_cues_for_navigation"/>
+          <Action ID="ask_for_directions"/>
+          <Action ID="take_shortcut"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="task_completed"/>
+          <Action ID="send_status_update_to_fleet_control"/>
+          <Condition ID="assistance_needed"/>
+          <Action ID="request_assistance_from_human_worker"/>
+          <Condition ID="instruction_received"/>
+          <Action ID="receive_and_acknowledge_instructions"/>
+          <Action ID="engage_in_conversation_with_human_worker"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="distraction_detected"/>
+          <Action ID="pause_task_execution"/>
+          <Action ID="resume_task_execution_after_distraction"/>
+          <Action ID="adapt_to_change_in_priority_or_schedule"/>
+          <Action ID="ignore_non_essential_distraction"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="prolonged_work_period_detected"/>
+          <Action ID="exhibit_decreased_productivity"/>
+          <Action ID="take_scheduled_break"/>
+          <Action ID="make_mistakes_due_to_fatigue"/>
+          <Action ID="request_replacement_or_assistance"/>
+        </Sequence>
+        <Sequence>
+          <Condition ID="equipment_interaction_required"/>
+          <Action ID="operate_forklift"/>
+          <Action ID="use_handheld_scanner"/>
+          <Action ID="interact_with_machine_for_maintenance"/>
+          <Action ID="follow_procedures_for_equipment_startup_or_shutdown"/>
+        </Sequence>
+      </Parallel>
+    </Fallback>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,213 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="WeatherEnvironmentRepertoire">
+    <Fallback name="weather_environment_selector">
+
+      <!-- Emergency Landing Conditions: highest priority -->
+      <Sequence name="emergency_landing_behavior">
+        <Condition ID="IsEmergencyLandingRequired"/>
+        <Fallback name="emergency_landing_procedures">
+          <Sequence name="sudden_loss_of_visibility">
+            <Condition ID="IsSuddenLossOfVisibility"/>
+            <Action ID="SimulateFogOrHaze"/>
+            <Action ID="TriggerEmergencyLandingProtocol"/>
+          </Sequence>
+          <Sequence name="rapidly_deteriorating_weather">
+            <Condition ID="IsRapidlyDeterioratingWeather"/>
+            <Action ID="SimulateThunderstorm"/>
+            <Action ID="TriggerEmergencyLandingProtocol"/>
+          </Sequence>
+          <Sequence name="system_failure">
+            <Condition ID="IsSystemFailure"/>
+            <Action ID="SimulateSystemFailure"/>
+            <Action ID="TriggerEmergencyLandingProtocol"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Edge Case Scenarios: next priority -->
+      <Sequence name="edge_case_behavior">
+        <Condition ID="IsEdgeCaseScenario"/>
+        <Fallback name="edge_case_procedures">
+          <Sequence name="tornado_scenario">
+            <Condition ID="IsTornadoScenario"/>
+            <Action ID="SimulateTornado"/>
+            <Action ID="TriggerTornadoResponse"/>
+          </Sequence>
+          <Sequence name="dust_devil_scenario">
+            <Condition ID="IsDustDevilScenario"/>
+            <Action ID="SimulateDustDevil"/>
+            <Action ID="TriggerDustDevilResponse"/>
+          </Sequence>
+          <Sequence name="thermal_activity_scenario">
+            <Condition ID="IsThermalActivityScenario"/>
+            <Action ID="SimulateThermalActivity"/>
+            <Action ID="TriggerThermalActivityResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Sensor Interference: next priority -->
+      <Sequence name="sensor_interference_behavior">
+        <Condition ID="IsSensorInterference"/>
+        <Fallback name="sensor_interference_procedures">
+          <Sequence name="radio_frequency_interference">
+            <Condition ID="IsRadioFrequencyInterference"/>
+            <Action ID="SimulateRadioFrequencyInterference"/>
+            <Action ID="TriggerRadioFrequencyInterferenceResponse"/>
+          </Sequence>
+          <Sequence name="electromagnetic_pulse">
+            <Condition ID="IsElectromagneticPulse"/>
+            <Action ID="SimulateElectromagneticPulse"/>
+            <Action ID="TriggerElectromagneticPulseResponse"/>
+          </Sequence>
+          <Sequence name="solar_flare">
+            <Condition ID="IsSolarFlare"/>
+            <Action ID="SimulateSolarFlare"/>
+            <Action ID="TriggerSolarFlareResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Air Traffic Interaction: next priority -->
+      <Sequence name="air_traffic_interaction_behavior">
+        <Condition ID="IsAirTrafficInteraction"/>
+        <Fallback name="air_traffic_interaction_procedures">
+          <Sequence name="nearby_aircraft">
+            <Condition ID="IsNearbyAircraft"/>
+            <Action ID="SimulateNearbyAircraft"/>
+            <Action ID="TriggerNearbyAircraftResponse"/>
+          </Sequence>
+          <Sequence name="swarm_of_drones">
+            <Condition ID="IsSwarmOfDrones"/>
+            <Action ID="SimulateSwarmOfDrones"/>
+            <Action ID="TriggerSwarmOfDronesResponse"/>
+          </Sequence>
+          <Sequence name="helicopter">
+            <Condition ID="IsHelicopter"/>
+            <Action ID="SimulateHelicopter"/>
+            <Action ID="TriggerHelicopterResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Extreme Weather: next priority -->
+      <Sequence name="extreme_weather_behavior">
+        <Condition ID="IsExtremeWeather"/>
+        <Fallback name="extreme_weather_procedures">
+          <Sequence name="thunderstorm">
+            <Condition ID="IsThunderstorm"/>
+            <Action ID="SimulateThunderstorm"/>
+            <Action ID="TriggerThunderstormResponse"/>
+          </Sequence>
+          <Sequence name="hurricane">
+            <Condition ID="IsHurricane"/>
+            <Action ID="SimulateHurricane"/>
+            <Action ID="TriggerHurricaneResponse"/>
+          </Sequence>
+          <Sequence name="blizzard">
+            <Condition ID="IsBlizzard"/>
+            <Action ID="SimulateBlizzard"/>
+            <Action ID="TriggerBlizzardResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Gust Encounter: next priority -->
+      <Sequence name="gust_encounter_behavior">
+        <Condition ID="IsGustEncounter"/>
+        <Fallback name="gust_encounter_procedures">
+          <Sequence name="sudden_gust">
+            <Condition ID="IsSuddenGust"/>
+            <Action ID="SimulateSuddenGust"/>
+            <Action ID="TriggerSuddenGustResponse"/>
+          </Sequence>
+          <Sequence name="series_of_gusts">
+            <Condition ID="IsSeriesOfGusts"/>
+            <Action ID="SimulateSeriesOfGusts"/>
+            <Action ID="TriggerSeriesOfGustsResponse"/>
+          </Sequence>
+          <Sequence name="microburst">
+            <Condition ID="IsMicroburst"/>
+            <Action ID="SimulateMicroburst"/>
+            <Action ID="TriggerMicroburstResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Wind Resistance: next priority -->
+      <Sequence name="wind_resistance_behavior">
+        <Condition ID="IsWindResistance"/>
+        <Fallback name="wind_resistance_procedures">
+          <Sequence name="steady_wind">
+            <Condition ID="IsSteadyWind"/>
+            <Action ID="SimulateSteadyWind"/>
+            <Action ID="TriggerSteadyWindResponse"/>
+          </Sequence>
+          <Sequence name="wind_shear">
+            <Condition ID="IsWindShear"/>
+            <Action ID="SimulateWindShear"/>
+            <Action ID="TriggerWindShearResponse"/>
+          </Sequence>
+          <Sequence name="gust_front">
+            <Condition ID="IsGustFront"/>
+            <Action ID="SimulateGustFront"/>
+            <Action ID="TriggerGustFrontResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Visibility Obstruction: next priority -->
+      <Sequence name="visibility_obstruction_behavior">
+        <Condition ID="IsVisibilityObstruction"/>
+        <Fallback name="visibility_obstruction_procedures">
+          <Sequence name="uniform_fog">
+            <Condition ID="IsUniformFog"/>
+            <Action ID="SimulateUniformFog"/>
+            <Action ID="TriggerUniformFogResponse"/>
+          </Sequence>
+          <Sequence name="haze_condition">
+            <Condition ID="IsHazeCondition"/>
+            <Action ID="SimulateHazeCondition"/>
+            <Action ID="TriggerHazeConditionResponse"/>
+          </Sequence>
+          <Sequence name="dust_storm">
+            <Condition ID="IsDustStorm"/>
+            <Action ID="SimulateDustStorm"/>
+            <Action ID="TriggerDustStormResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Turbulence Response: next priority -->
+      <Sequence name="turbulence_response_behavior">
+        <Condition ID="IsTurbulenceResponse"/>
+        <Fallback name="turbulence_response_procedures">
+          <Sequence name="random_gusts">
+            <Condition ID="IsRandomGusts"/>
+            <Action ID="SimulateRandomGusts"/>
+            <Action ID="TriggerRandomGustsResponse"/>
+          </Sequence>
+          <Sequence name="turbulent_layer">
+            <Condition ID="IsTurbulentLayer"/>
+            <Action ID="SimulateTurbulentLayer"/>
+            <Action ID="TriggerTurbulentLayerResponse"/>
+          </Sequence>
+          <Sequence name="vortex">
+            <Condition ID="IsVortex"/>
+            <Action ID="SimulateVortex"/>
+            <Action ID="TriggerVortexResponse"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Normal Conditions: default behavior -->
+      <Sequence name="normal_conditions_behavior">
+        <Action ID="SimulateClearSkies"/>
+        <Action ID="SimulateGentleBreeze"/>
+        <Action ID="SimulateDiurnalWindPattern"/>
+        <Action ID="SimulateDayNightCycle"/>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

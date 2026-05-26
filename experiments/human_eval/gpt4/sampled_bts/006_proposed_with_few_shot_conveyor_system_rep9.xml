@@ -1,0 +1,68 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="ConveyorSystemRepertoire">
+    <Fallback name="conveyor_behavior_selector">
+
+      <!-- Emergency Shutdown: highest priority -->
+      <Sequence name="emergency_shutdown_behavior">
+        <Condition ID="IsCriticalFaultDetected"/>
+        <Action ID="SafeShutdown"/>
+        <Action ID="NotifyEmergencyServices"/>
+      </Sequence>
+
+      <!-- Safety Responses -->
+      <Sequence name="safety_responses_behavior">
+        <Fallback name="safety_actions">
+          <Sequence name="overheating_response">
+            <Condition ID="IsOverheatingDetected"/>
+            <Action ID="ActivateCoolingSystem"/>
+          </Sequence>
+          <Sequence name="accident_prevention">
+            <Condition ID="IsMalfunctionDetected"/>
+            <Action ID="InitiateEmergencyShutdown"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Fault/Error Handling -->
+      <Sequence name="fault_handling_behavior">
+        <Fallback name="fault_actions">
+          <Sequence name="jammed_item_response">
+            <Condition ID="IsItemJammed"/>
+            <Action ID="ActivateAlarm"/>
+          </Sequence>
+          <Sequence name="broken_conveyor_response">
+            <Condition ID="IsConveyorBeltBroken"/>
+            <Action ID="HaltOperations"/>
+          </Sequence>
+          <Sequence name="speed_control_error_response">
+            <Condition ID="IsSpeedControlErrorDetected"/>
+            <Action ID="AdjustSpeedControl"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Normal Operation -->
+      <Sequence name="normal_operation_behavior">
+        <Fallback name="normal_operations">
+          <Sequence name="item_presence_detection">
+            <Condition ID="IsItemDetected"/>
+            <Action ID="ActivateConveyor"/>
+          </Sequence>
+          <Sequence name="item_absence_detection">
+            <Condition ID="IsItemAbsenceDetected"/>
+            <Action ID="DeactivateConveyor"/>
+          </Sequence>
+          <Sequence name="speed_adjustment">
+            <Condition ID="IsItemTypeDetected"/>
+            <Action ID="AdjustConveyorSpeed"/>
+          </Sequence>
+          <Sequence name="handoff_initiation">
+            <Condition ID="IsItemAtEndOfConveyor"/>
+            <Action ID="InitiateHandoffToAGV"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

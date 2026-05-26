@@ -1,0 +1,75 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="ElevatorCarRepertoire">
+    <Fallback name="elevator_behavior_selector">
+
+      <!-- Emergency Rescue -->
+      <Sequence name="emergency_rescue">
+        <Condition ID="IsRescueNeeded"/>
+        <Action ID="StopAtNearestFloor"/>
+        <Action ID="OpenDoors"/>
+        <Action ID="ProvideInformationToRescuers"/>
+        <Action ID="ObeyRescuerCommands"/>
+      </Sequence>
+
+      <!-- Safety Responses -->
+      <Sequence name="safety_responses">
+        <Fallback name="safety_actions">
+          <Sequence name="power_cut_response">
+            <Condition ID="IsPowerCut"/>
+            <Action ID="InitiateEmergencyStop"/>
+            <Action ID="ActivateBackupPower"/>
+          </Sequence>
+          <Sequence name="brake_failure_response">
+            <Condition ID="IsBrakeFailure"/>
+            <Action ID="ActivateEmergencyBrakes"/>
+          </Sequence>
+          <Sequence name="fire_alarm_response">
+            <Condition ID="IsFireAlarmTriggered"/>
+            <Action ID="MoveToNearestFloor"/>
+            <Action ID="OpenDoors"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Fault/Error Handling -->
+      <Sequence name="fault_handling">
+        <Fallback name="fault_actions">
+          <Sequence name="door_malfunction_response">
+            <Condition ID="IsDoorMalfunction"/>
+            <Action ID="AttemptDoorClose"/>
+          </Sequence>
+          <Sequence name="sensor_failure_response">
+            <Condition ID="IsSensorFailure"/>
+            <Action ID="StopMovement"/>
+            <Action ID="SendAlertToControlSoftware"/>
+          </Sequence>
+          <Sequence name="brake_issue_handling">
+            <Condition ID="IsBrakeIssue"/>
+            <Action ID="InitiateEmergencyStopProcedures"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Normal Operation -->
+      <Sequence name="normal_operation">
+        <Fallback name="operation_actions">
+          <Sequence name="moving_between_floors">
+            <Condition ID="IsButtonPressed"/>
+            <Action ID="MoveToSelectedFloor"/>
+          </Sequence>
+          <Sequence name="door_operation">
+            <Action ID="OpenDoors"/>
+            <Action ID="CloseDoors"/>
+          </Sequence>
+          <Sequence name="user_request_response">
+            <Condition ID="IsFloorButtonPressed"/>
+            <Action ID="StopAtSelectedFloor"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Other dimensions are implemented similarly with Sequences and Fallbacks -->
+
+    </Fallback>
+  </BehaviorTree>
+</root>

@@ -1,0 +1,22 @@
+<root BTCPP_format="4">
+<BehaviorTree ID="GroundTargetBehavior">
+    <Fallback>
+        <Sequence>
+            <Action ID="EmergencyResponse"/>
+            <Action ID="SafetyResponse"/>
+        </Sequence>
+        <Sequence>
+            <Action ID="FaultHandling"/>
+            <Action ID="CommunicationFailure"/>
+        </Sequence>
+        <Sequence>
+            <Action ID="NormalInteraction"/>
+            <Action ID="ObstacleBehavior"/>
+            <Action ID="EnvironmentalDisturbance"/>
+            <Action ID="InterAgentInteraction"/>
+            <Action ID="UnanticipatedBehavior"/>
+            <Action ID="EdgeCases"/>
+        </Sequence>
+    </Fallback>
+</BehaviorTree>
+</root>

@@ -1,0 +1,51 @@
+<root BTCPP_format="4">
+  <!-- Behavior repertoire for a conveyor system in a smart factory SITL environment. -->
+  <BehaviorTree ID="ConveyorSystemRepertoire">
+    <Fallback name="conveyor_system_behavior_selector">
+
+      <!-- Normal operation behavior: highest priority -->
+      <Sequence name="normal_operation_behavior">
+        <Condition ID="IsProductionRunning"/>
+        <Fallback name="conveyor_mode_selector">
+          <Sequence name="transport_mode">
+            <Condition ID="IsMaterialAvailable"/>
+            <Action ID="StartConveyorBelt"/>
+            <Action ID="TransportMaterial"/>
+          </Sequence>
+          <Sequence name="sorting_mode">
+            <Condition ID="IsSortingRequired"/>
+            <Action ID="ActivateSortingMechanism"/>
+            <Action ID="SortMaterial"/>
+          </Sequence>
+          <Sequence name="buffering_mode">
+            <Condition ID="IsBufferingRequired"/>
+            <Action ID="ActivateBufferingMechanism"/>
+            <Action ID="BufferMaterial"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <!-- Maintenance behavior: triggered by scheduling or fault detection -->
+      <Sequence name="maintenance_behavior">
+        <Condition ID="IsMaintenanceScheduled"/>
+        <Action ID="StopConveyorBelt"/>
+        <Action ID="PerformMaintenanceTasks"/>
+      </Sequence>
+
+      <!-- Fault behavior: triggered by sensor readings or error detection -->
+      <Sequence name="fault_behavior">
+        <Condition ID="IsConveyorFaulty"/>
+        <Action ID="StopConveyorBelt"/>
+        <Action ID="LogFault"/>
+        <Action ID="AlertMaintenancePersonnel"/>
+      </Sequence>
+
+      <!-- Idle behavior: default state when no other behavior is active -->
+      <Sequence name="idle_behavior">
+        <Action ID="StopConveyorBelt"/>
+        <Action ID="EnterStandbyMode"/>
+      </Sequence>
+
+    </Fallback>
+  </BehaviorTree>
+</root>

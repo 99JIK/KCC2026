@@ -1,0 +1,13 @@
+sample_id,domain,object,strategy,rep_index,bt_file,auto_total,auto_covered,auto_ratio,is_valid
+0,drone,weather_environment,proposed_with_few_shot,3,000_proposed_with_few_shot_weather_environment_rep3.xml,6,0,0.0,True
+1,drone,airspace_obstacle,few_shot_generic,0,001_few_shot_generic_airspace_obstacle_rep0.xml,6,0,0.0,True
+2,elevator,elevator_car,proposed,3,002_proposed_elevator_car_rep3.xml,8,2,0.25,True
+3,smart_factory,factory_equipment,zero_shot,0,003_zero_shot_factory_equipment_rep0.xml,6,0,0.0,True
+4,smart_factory,human_worker,few_shot_generic,8,004_few_shot_generic_human_worker_rep8.xml,6,0,0.0,True
+5,drone,ground_target,proposed,0,005_proposed_ground_target_rep0.xml,6,0,0.0,True
+6,smart_factory,conveyor_system,proposed_with_few_shot,9,006_proposed_with_few_shot_conveyor_system_rep9.xml,6,2,0.333,True
+7,elevator,elevator_car,proposed_with_few_shot,4,007_proposed_with_few_shot_elevator_car_rep4.xml,8,2,0.25,True
+8,drone,airspace_obstacle,zero_shot,5,008_zero_shot_airspace_obstacle_rep5.xml,6,0,0.0,True
+9,elevator,elevator_car,zero_shot,7,009_zero_shot_elevator_car_rep7.xml,8,0,0.0,True
+10,elevator,elevator_car,few_shot_generic,9,010_few_shot_generic_elevator_car_rep9.xml,8,2,0.25,True
+11,smart_factory,other_agv,proposed,5,011_proposed_other_agv_rep5.xml,7,1,0.143,True

@@ -1,0 +1,92 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="BuildingSystemRepertoire">
+    <Parallel success_count="5" failure_count="1">
+
+      <!-- Fire alarm subsystem -->
+      <Fallback name="fire_alarm_handler">
+        <Sequence name="fire_alarm_triggered">
+          <Condition ID="IsFireAlarmActivated"/>
+          <Action ID="SendFireAlarmSignalToElevator"/>
+          <Action ID="InitiateEvacuationProtocol"/>
+        </Sequence>
+        <Sequence name="fire_alarm_reset">
+          <Condition ID="IsFireAlarmReset"/>
+          <Action ID="SendFireAlarmResetSignalToElevator"/>
+          <Action ID="ResumeNormalOperation"/>
+        </Sequence>
+        <ForceSuccess>
+          <Action ID="NoFireAlarm"/>
+        </ForceSuccess>
+      </Fallback>
+
+      <!-- Seismic sensor subsystem -->
+      <Fallback name="seismic_sensor_handler">
+        <Sequence name="earthquake_detected">
+          <Condition ID="IsSeismicActivityDetected"/>
+          <Action ID="SendEarthquakeSignalToElevator"/>
+          <Action ID="InitiateEarthquakeResponseProtocol"/>
+        </Sequence>
+        <Sequence name="seismic_sensor_reset">
+          <Condition ID="IsSeismicActivityCleared"/>
+          <Action ID="SendSeismicResetSignalToElevator"/>
+          <Action ID="ResumeNormalOperation"/>
+        </Sequence>
+        <ForceSuccess>
+          <Action ID="NoSeismicActivity"/>
+        </ForceSuccess>
+      </Fallback>
+
+      <!-- Power management subsystem -->
+      <Fallback name="power_management_handler">
+        <Sequence name="power_failure">
+          <Condition ID="IsPowerFailureDetected"/>
+          <Action ID="SendPowerFailureSignalToElevator"/>
+          <Action ID="InitiatePowerFailureResponseProtocol"/>
+        </Sequence>
+        <Sequence name="power_restore">
+          <Condition ID="IsPowerRestored"/>
+          <Action ID="SendPowerRestoreSignalToElevator"/>
+          <Action ID="ResumeNormalOperation"/>
+        </Sequence>
+        <ForceSuccess>
+          <Action ID="NoPowerFailure"/>
+        </ForceSuccess>
+      </Fallback>
+
+      <!-- Security access subsystem -->
+      <Fallback name="security_access_handler">
+        <Sequence name="security_breach">
+          <Condition ID="IsSecurityBreachDetected"/>
+          <Action ID="SendSecurityBreachSignalToElevator"/>
+          <Action ID="InitiateSecurityBreachResponseProtocol"/>
+        </Sequence>
+        <Sequence name="security_access_granted">
+          <Condition ID="IsSecurityAccessGranted"/>
+          <Action ID="SendSecurityAccessGrantedSignalToElevator"/>
+          <Action ID="AllowAuthorizedAccess"/>
+        </Sequence>
+        <ForceSuccess>
+          <Action ID="NoSecurityBreach"/>
+        </ForceSuccess>
+      </Fallback>
+
+      <!-- Firefighter mode subsystem -->
+      <Fallback name="firefighter_mode_handler">
+        <Sequence name="firefighter_mode_enabled">
+          <Condition ID="IsFirefighterModeEnabled"/>
+          <Action ID="SendFirefighterModeSignalToElevator"/>
+          <Action ID="InitiateFirefighterModeProtocol"/>
+        </Sequence>
+        <Sequence name="firefighter_mode_disabled">
+          <Condition ID="IsFirefighterModeDisabled"/>
+          <Action ID="SendFirefighterModeResetSignalToElevator"/>
+          <Action ID="ResumeNormalOperation"/>
+        </Sequence>
+        <ForceSuccess>
+          <Action ID="NoFirefighterMode"/>
+        </ForceSuccess>
+      </Fallback>
+
+    </Parallel>
+  </BehaviorTree>
+</root>
