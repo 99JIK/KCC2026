@@ -1,15 +1,15 @@
 # 대규모 언어 모델을 활용한 임베디드 소프트웨어 시험 환경의 행동 자동 생성
 
-**김정인**<sup>○1</sup> · **김덕엽**<sup>1</sup> · **이우진**<sup>1</sup>
+**김정인**<sup>○1</sup> · **김덕엽**<sup>1</sup> · **서혜령**<sup>1</sup> · **이우진**<sup>1</sup>
 
 <sup>1</sup>경북대학교 컴퓨터학부
-[99jik@99jik.com](mailto:99jik@99jik.com), [woojin@knu.ac.kr](mailto:woojin@knu.ac.kr), [ejrduq77@naver.com](mailto:ejrduq77@naver.com)
+[99jik@99jik.com](mailto:99jik@99jik.com), [woojin@knu.ac.kr](mailto:woojin@knu.ac.kr), [suhryung@outlook.com](mailto:suhryung@outlook.com) [ejrduq77@naver.com](mailto:ejrduq77@naver.com)
 
 ---
 
-## Automatic Generation of Test Environment Behaviors Using LLM for Embedded Software Testing
+## Automatic Behavior Generation for Embedded Software Testing Environments Using Large Language Models
 
-**Jeongin Kim**<sup>○1</sup> · **Deokyoep Kim**<sup>1</sup> · **Woojin Lee**<sup>1</sup>
+**Jeongin Kim**<sup>○1</sup> · **Deokyoep Kim**<sup>1</sup> · **Hyeryung Suh**<sup>1</sup> · **Woojin Lee**<sup>1</sup>
 
 <sup>1</sup>School of Computer Science and Engineering, Kyungpook National University
 
@@ -21,7 +21,7 @@ KCC 2026 제출 논문의 실험 자료를 그대로 담은 저장소다. 880회
 
 ## 요 약
 
-임베디드 Software-in-the-Loop 테스트에서 환경 시나리오 정의의 수동 작업은 핵심 병목이다. 기존의 LLM 기반 행동 트리 생성 연구는 특정 작업에 대한 개별 행동 트리를 생성하는 구조로, 행동의 사전 지정이 요구된다. 본 논문에서는 환경 객체의 행위를 가능한 행동의 집합으로 모델링하고, 이를 LLM으로 자동 생성하는 분해–유도–합성 3단계 프롬프팅 파이프라인을 제안한다. 엘리베이터, 드론, 스마트 팩토리 세 도메인의 환경 객체에 대해 두 종류의 LLM으로 실험한 결과, 제안 방법은 제로샷 및 퓨샷 대비 행동 포괄률을 통계적으로 유의미하게 향상시켰으며, 이 효과는 모델과 도메인에 걸쳐 일관되게 나타났다. 또한 구조 수정이 구조 유효율만 향상시키고 행동 포괄률에는 제한적 영향만 주는 것으로 나타나, 구조적 정확성과 행동 다양성이 독립적 능력임을 확인하였다.
+임베디드 Software-in-the-Loop 테스트에서 환경 시나리오 정의의 수동 작업은 핵심 병목이다. 기존의 LLM 기반 행동 트리 생성 연구는 특정 작업에 대한 개별 행동 트리를 생성하는 구조로, 행동의 사전 지정이 요구된다. 본 논문에서는 환경 객체의 행위를 가능한 행동의 집합으로 모델링하고, 이를 LLM으로 자동 생성하는 분해-유도-합성 3단계 프롬프팅 파이프라인을 제안한다. 엘리베이터, 드론, 스마트 팩토리 세 도메인의 환경 객체 11개에 대해 폐쇄형, 개방형 LLM 두 종류로 실험한 결과, 제안 방법은 제로샷 및 퓨샷 대비 행동 포괄률을 2배 이상 통계적으로 유의미하게 향상시켰다. 이 효과는 모델과 도메인에 걸쳐 일관되게 나타났다. 또한 구조 수정이 구조 유효율만 향상시키고 행동 포괄률에는 제한적 영향만 주는 것으로 나타나, 구조적 정확성과 행동 다양성이 독립적 능력임을 확인하였다.
 
 ---
 
